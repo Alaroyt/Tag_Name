@@ -1,0 +1,9 @@
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\bin\Debug\Tag_Name.exe.config
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\bin\Debug\Tag_Name.exe
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\bin\Debug\Tag_Name.pdb
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\obj\Debug\Tag_Name.csprojResolveAssemblyReference.cache
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\obj\Debug\Tag_Name.MainForm.resources
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\obj\Debug\Tag_Name.csproj.GenerateResource.Cache
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\obj\Debug\Tag_Name.exe
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\obj\Debug\Tag_Name.pdb
+C:\Users\cd\Documents\SharpDevelop Projects\Tag_Name\obj\Debug\Tag_Name.g.resources
