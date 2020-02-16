@@ -11,6 +11,12 @@ namespace Tag_Name
 	/// </summary>
 	public partial class MainForm : Form
 	{
+		const string nameCounter = "Кол-во ходов: ";
+		const string nameTimer = "Время: ";
+		
+		Label CountLabel;
+		Label TimerLabel;
+		
 		int score = 1;
 		const string name = "Кол-во ходов: ";
 		
@@ -28,7 +34,6 @@ namespace Tag_Name
 		{
 			InitializeComponent();
 			_GenMap();
-			
 		}
 		void _GenMap()
 		{
@@ -106,41 +111,81 @@ namespace Tag_Name
 				}
 			}
 			
-			Label TimerLabel = new Label();
+			TimerLabel = new Label();
 			TimerLabel.Size = new Size(_SizeOfPix, _SizeOfPix);
 			TimerLabel.Location = new Point(_SizeOfPix * n + 2, 10);
 			TimerLabel.Text = "Время";
 			Controls.Add(TimerLabel);
 			
-			Label CountLabel = new Label();
+			CountLabel = new Label();
 			CountLabel.Size = new Size(_SizeOfPix, _SizeOfPix);
+			CountLabel.Font= new Font("Arial",7);
 			CountLabel.Location = new Point(_SizeOfPix * n + 2, 10 + _SizeOfPix);
-			CountLabel.Text = "Счетчик";
+			CountLabel.Text = "Кол-во ходов: 0";
 			Controls.Add(CountLabel);
 		}
 		
 		void _MyClick(object sender, EventArgs e)
 		{
-			
-			Text = name + score++;
-			
 			//индекс пикчюрбокса, который был нажат
 			int indexOfPictureBox = _WhichPictureBoxWasClicked(sender.GetHashCode());
 			
+			if (_CanMove(indexOfPictureBox)) {
+				
+				int tempIndex= _indexOfEmptyPictureBox();
+				Point temp = Controls[tempIndex].Location;
+				
+				Controls[tempIndex].Location = Controls[indexOfPictureBox].Location;
+				
+				Controls[indexOfPictureBox].Location = temp;
+				
+				CountLabel.Text=nameCounter+ score++;
+			}
+			
+		}
+
+		bool _CanMove(int indexOfPictureBox)
+		{
+			Point temp = Controls[_indexOfEmptyPictureBox()].Location;
+			Point[] pointsNearPictureBox = {
+				new Point(temp.X, temp.Y),
+				new Point(temp.X + _SizeOfPix, temp.Y),
+				new Point(temp.X - _SizeOfPix, temp.Y),
+				new Point(temp.X, temp.Y + _SizeOfPix),
+				new Point(temp.X, temp.Y - _SizeOfPix),
+			};
+			foreach (var el in pointsNearPictureBox) {
+				if (el == Controls[indexOfPictureBox].Location) {
+					return true;
+				}
+			}
+			
+			return false;
+		}
+		int _indexOfEmptyPictureBox()
+		{
+			foreach (var el in ExistingBox) {
+				if (Controls[el.Key].BackColor == Color.Transparent) {
+					return el.Key;
+				}
+			}
+			
+			return 0;
 		}
 		
-//		static int [] Shuffle(int[] arr)
-//		{
-//			Random rand = new Random();
-//			for (int i = arr.Length - 1; i >= 1; i--) {
-//				int j = rand.Next(i + 1);
-// 
-//				int tmp = arr[j];
-//				arr[j] = arr[i];
-//				arr[i] = tmp;
-//			}
-//			return arr;
-//		}
+		
+		//		static int [] Shuffle(int[] arr)
+		//		{
+		//			Random rand = new Random();
+		//			for (int i = arr.Length - 1; i >= 1; i--) {
+		//				int j = rand.Next(i + 1);
+		//
+		//				int tmp = arr[j];
+		//				arr[j] = arr[i];
+		//				arr[i] = tmp;
+		//			}
+		//			return arr;
+		//		}
 
 		int _WhichPictureBoxWasClicked(int i)
 		{
